@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ademar Davi | Portfólio front-end</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="cabecalho largura">
+        <a href="#inicio" aria-label="Voltar ao início">
+            <img class="marca" src="./738EEF5F-4B1C-443B-A646-D0DB951BDF83.jpeg" alt="" width="64" height="64">
+        </a>
+        <nav aria-label="Navegação principal">
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#habilidades">Habilidades</a>
+            <a href="#projetos">Projetos</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="abertura">
+            <div class="cristal" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            <div class="largura abertura-conteudo">
+                <h1>Do design<br class="quebra"> à interface</h1>
+                <p>Portfólio front-end</p>
+                <a class="botao" href="#projetos">Ver projetos <span aria-hidden="true">↓</span></a>
+            </div>
+        </section>
+
+        <section id="sobre" class="secao largura">
+            <h2>Sobre mim</h2>
+            <p class="texto">Sou Ademar Davi, estudante de Engenharia de Software. Gosto de paraticar e construir coisas novas, possuo um olhar apurado para os detalhes, o que me ajuda a prevenir erros e elevar a qualidade dos projetos.</p>
+        </section>
+
+        <section id="habilidades" class="secao largura">
+            <h2>Habilidades</h2>
+            <ul class="etiquetas">
+                <li>HTML</li><li>CSS</li><li>Flexbox</li><li>Layout responsivo</li>
+            </ul>
+        </section>
+
+        <section id="projetos" class="secao largura">
+            <h2>Projetos</h2>
+            <article class="projeto">
+                <h3>Portfólio front-end</h3>
+                <p>Uma página responsiva com navegação entre seções, identidade visual própria e um fundo de facetas que reage à rolagem.</p>
+                <a class="botao" href="#inicio">Rever a abertura <span aria-hidden="true">↑</span></a>
+            </article>
+        </section>
+    </main>
+
+    <footer class="largura rodape">Ademar Davi</footer>
+
+    <script>
+        const abertura = document.querySelector(".abertura");
+        const movimentoReduzido = matchMedia("(prefers-reduced-motion: reduce)");
+        let quadroPendente = false;
+
+        function atualizarCristal() {
+            const progresso = movimentoReduzido.matches
+                ? 0
+                : Math.min(1, Math.max(0, -abertura.getBoundingClientRect().top / abertura.offsetHeight));
+            abertura.style.setProperty("--deslocamento", progresso * -110 + "px");
+            abertura.style.setProperty("--intensidade", 1 - progresso * 0.65);
+            quadroPendente = false;
+        }
+
+        function agendarAtualizacao() {
+            if (quadroPendente) return;
+            quadroPendente = true;
+            requestAnimationFrame(atualizarCristal);
+        }
+
+        addEventListener("scroll", agendarAtualizacao, { passive: true });
+        addEventListener("resize", agendarAtualizacao);
+        movimentoReduzido.addEventListener("change", agendarAtualizacao);
+        atualizarCristal();
+    </script>
+</body>
+</html>

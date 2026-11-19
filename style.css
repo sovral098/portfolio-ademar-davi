@@ -1,0 +1,154 @@
+:root {
+    color-scheme: dark;
+    --fundo: #080d0c;
+    --texto: #f2f5f3;
+    --suave: #b4c5bc;
+    --verde: #79dfb8;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    scroll-behavior: smooth;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); color: var(--texto); }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--verde); outline-offset: 5px; }
+.largura { width: min(1100px, calc(100% - 48px)); margin-inline: auto; }
+
+.cabecalho {
+    position: absolute;
+    z-index: 2;
+    inset: 0 0 auto;
+    mix-blend-mode: screen;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 86px;
+}
+
+.cabecalho > a { display: inline-flex; }
+.marca { display: block; filter: brightness(56%) contrast(4000%); }
+nav { display: flex; flex-wrap: wrap; gap: clamp(12px, 3vw, 32px); }
+nav a { color: var(--suave); font-size: .88rem; font-weight: 600; text-decoration: none; }
+nav a:hover { color: var(--verde); }
+
+.abertura {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    align-items: center;
+    min-height: 100svh;
+    background: #0a1410;
+}
+
+.abertura::after {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    background: linear-gradient(90deg, #080d0c 3%, #080d0ce8 30%, #080d0c40 73%),
+        linear-gradient(0deg, var(--fundo), transparent 26%);
+}
+
+.cristal {
+    position: absolute;
+    z-index: -2;
+    inset: -22% -12%;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 76% 35%, #2c8f65, #143f30 40%, #081a14 70%);
+    transform: translateY(calc(2 * var(--deslocamento, 0px)));
+    opacity: var(--intensidade, 1);
+    pointer-events: none;
+}
+
+.cristal span { position: absolute; inset: 0; }
+.cristal span:nth-child(1) {
+    clip-path: polygon(24% 0, 83% 0, 67% 42%, 52% 54%);
+    background: linear-gradient(130deg, #0d382c 31%, #3f9c72 95%);
+}
+.cristal span:nth-child(2) {
+    clip-path: polygon(83% 0, 100% 0, 100% 62%, 67% 42%);
+    background: linear-gradient(156deg, #74c79d 12%, #143d30 68%);
+}
+.cristal span:nth-child(3) {
+    clip-path: polygon(52% 54%, 67% 42%, 100% 62%, 86% 100%);
+    background: linear-gradient(122deg, #102e24 46%, #2d8a64 75%, #86cda6);
+}
+.cristal span:nth-child(4) {
+    clip-path: polygon(52% 54%, 86% 100%, 44% 100%, 18% 69%);
+    background: linear-gradient(154deg, #0a2219 47%, #205a44);
+}
+
+.abertura-conteudo { padding-block: 140px 74px; }
+h1, h2, h3 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+h1 { max-width: 14ch; font-size: clamp(3rem, 8.5vw, 7.5rem); line-height: .98; letter-spacing: -.055em; }
+.abertura p { color: var(--suave); margin: 22px 0 28px; font-size: 1.1rem; }
+
+.botao {
+    display: inline-flex;
+    gap: .75rem;
+    align-items: center;
+    padding: .65rem 1rem;
+    border-radius: .4rem;
+    background: #0e211a;
+    color: var(--verde);
+    font-weight: 600;
+    text-decoration: none;
+}
+.botao:hover { background: #18382b; }
+
+.secao { padding-block: clamp(42px, 7vw, 78px); }
+h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+.texto, .projeto p { max-width: 62ch; color: var(--suave); line-height: 1.7; }
+.etiquetas { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; list-style: none; }
+.etiquetas li, .projeto { border-radius: .5rem; background: #102019; }
+.etiquetas li { padding: .55rem .9rem; }
+.projeto { max-width: 600px; margin-top: 22px; padding: clamp(20px, 4vw, 36px); }
+.projeto h3 { font-size: 1.6rem; }
+.rodape { padding-block: 32px; color: var(--suave); }
+
+@media (max-width: 540px) {
+    .largura { width: calc(100% - 40px); }
+
+    .cabecalho {
+        position: relative;
+        inset: auto;
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 12px;
+        min-height: 76px;
+        margin-bottom: -76px;
+        mix-blend-mode: normal;
+    }
+
+    .marca { width: 44px; height: 44px; }
+    nav { justify-content: flex-end; gap: 8px 12px; }
+    nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        font-size: .8rem;
+    }
+
+    .abertura-conteudo { padding-block: 110px 48px; }
+    h1 { font-size: clamp(2.35rem, 10.5vw, 3.5rem); }
+
+    .abertura::after {
+        background: linear-gradient(90deg, #080d0cfa 10%, #080d0c75),
+            linear-gradient(0deg, var(--fundo), transparent 26%);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .cristal { animation: refracao 7s ease-in-out infinite alternate; }
+
+    @keyframes refracao {
+        from { translate: 0 0; }
+        to { translate: -5% 4%; }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root { scroll-behavior: auto; }
+}
