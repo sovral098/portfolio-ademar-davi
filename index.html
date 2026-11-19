@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ademar Davi | Portfólio front-end</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .form-contato { display: grid; gap: 12px; max-width: 480px; margin-top: 22px; }
+        .form-contato input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #426056;
+            border-radius: .4rem;
+            background: #102019;
+            color: inherit;
+            font: inherit;
+        }
+        .form-contato input[aria-invalid="true"] { border-color: #ffada5; }
+        .form-contato .botao { justify-self: start; font: inherit; cursor: pointer; }
+        .form-contato [role="alert"] { margin: 0; color: #ffada5; }
+        .form-contato [role="status"] { margin: 0; color: var(--suave); }
+    </style>
 </head>
 <body>
     <header class="cabecalho largura">
@@ -16,6 +32,7 @@
             <a href="#sobre">Sobre</a>
             <a href="#habilidades">Habilidades</a>
             <a href="#projetos">Projetos</a>
+            <a href="#contato">Contato</a>
         </nav>
     </header>
 
@@ -31,7 +48,7 @@
 
         <section id="sobre" class="secao largura">
             <h2>Sobre mim</h2>
-            <p class="texto">Sou Ademar Davi, estudante de Engenharia de Software. Gosto de paraticar e construir coisas novas, possuo um olhar apurado para os detalhes, o que me ajuda a prevenir erros e elevar a qualidade dos projetos.</p>
+            <p class="texto">Sou Ademar Davi, estudante de Engenharia de Software. Estou estudando front-end e gosto de montar uma página, abrir no navegador e ir ajustando até que ela funcione bem no computador e no celular. É nessa parte que eu mais presto atenção aos detalhes.</p>
         </section>
 
         <section id="habilidades" class="secao largura">
@@ -48,6 +65,22 @@
                 <p>Uma página responsiva com navegação entre seções, identidade visual própria e um fundo de facetas que reage à rolagem.</p>
                 <a class="botao" href="#inicio">Rever a abertura <span aria-hidden="true">↑</span></a>
             </article>
+        </section>
+
+        <section id="contato" class="secao largura">
+            <h2>Contato</h2>
+            <form class="form-contato" novalidate>
+                <label for="nome">Nome</label>
+                <input id="nome" name="nome" autocomplete="name" required aria-describedby="erro-nome">
+                <p id="erro-nome" role="alert"></p>
+
+                <label for="email">E-mail</label>
+                <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="erro-email">
+                <p id="erro-email" role="alert"></p>
+
+                <button class="botao" type="submit">Enviar</button>
+                <p id="estado-contato" role="status"></p>
+            </form>
         </section>
     </main>
 
@@ -77,6 +110,41 @@
         addEventListener("resize", agendarAtualizacao);
         movimentoReduzido.addEventListener("change", agendarAtualizacao);
         atualizarCristal();
+
+        const formulario = document.querySelector(".form-contato");
+        const nome = document.querySelector("#nome");
+        const email = document.querySelector("#email");
+        const estado = document.querySelector("#estado-contato");
+
+        function mostrarErro(campo, mensagem) {
+            document.querySelector("#erro-" + campo.id).textContent = mensagem;
+            campo.setAttribute("aria-invalid", mensagem ? "true" : "false");
+        }
+
+        formulario.addEventListener("input", (evento) => {
+            mostrarErro(evento.target, "");
+            estado.textContent = "";
+        });
+
+        formulario.addEventListener("submit", (evento) => {
+            evento.preventDefault();
+            estado.textContent = "";
+
+            const erroNome = nome.value.trim() ? "" : "Informe seu nome.";
+            const erroEmail = email.validity.valueMissing ? "Informe seu e-mail."
+                : email.validity.typeMismatch ? "Digite um e-mail válido, como nome@exemplo.com."
+                : "";
+
+            mostrarErro(nome, erroNome);
+            mostrarErro(email, erroEmail);
+
+            if (erroNome || erroEmail) {
+                (erroNome ? nome : email).focus();
+                return;
+            }
+
+            estado.textContent = "Dados válidos. O envio do formulário ainda não está configurado.";
+        });
     </script>
 </body>
 </html>
