@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SalvaJá | Prévia do certificado</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <strong class="logo">Salva<span>Já</span></strong>
+        <a href="../../index.html#projeto-salvaja">Voltar ao portfólio</a>
+    </header>
+    <main class="chart-box">
+        <h1>Prévia do certificado</h1>
+        <p class="orientacao">Experimente o editor com o modelo de exemplo ou escolha uma imagem sua.</p>
+        <div class="question">
+            <label for="cert-bg-upload">Arte de fundo do certificado</label>
+            <input id="cert-bg-upload" type="file" accept="image/png,image/jpeg" aria-describedby="formatos erro-imagem">
+            <small id="formatos">PNG ou JPG em formato paisagem.</small>
+            <span id="erro-imagem" role="alert"></span>
+        </div>
+        <div class="question">
+            <label for="cert-text-input">Texto do certificado</label>
+            <input type="text" id="cert-text-input" value="Certificamos a participação de {NOME} na palestra {PALESTRA}." aria-describedby="marcas">
+            <small id="marcas">Use {NOME} e {PALESTRA} para ver os dados de exemplo na prévia.</small>
+        </div>
+        <section class="cert-preview-frame" id="cert-preview-frame" aria-labelledby="titulo-certificado">
+            <div class="folha">
+                <h2 id="titulo-certificado">Certificado de participação</h2>
+                <p id="cert-preview-text">Certificamos a participação de Aluno de exemplo na palestra Interfaces para a Web.</p>
+                <p class="assinatura-cert">Assinatura do palestrante</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

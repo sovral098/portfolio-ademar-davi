@@ -1,0 +1,54 @@
+* { box-sizing: border-box; }
+:root {
+    color-scheme: dark;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #071120;
+    color: #fff;
+}
+body { margin: 0 auto; padding: 0 1.25rem 2.5rem; max-width: 62rem; }
+header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.4rem; }
+header a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .95rem; color: #c9ddff; text-underline-offset: .25em; }
+.logo { font-size: 1.7rem; font-weight: 800; }
+.logo span { color: #60a5fa; }
+.chart-box {
+    background: linear-gradient(180deg, #0d1b2d, #13243b);
+    padding: clamp(1.1rem, 3vw, 1.9rem);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255,255,255,.08);
+}
+h1, h2, p { margin: 0; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+.orientacao { margin: .6rem 0 1.65rem; color: #b2c5df; line-height: 1.5; }
+.question { margin-bottom: 1.4rem; display: grid; gap: .55rem; }
+.question label { font-weight: 600; }
+.question input {
+    width: 100%;
+    min-width: 0;
+    min-height: 2.9rem;
+    padding: .75rem;
+    border: 1px solid #526986;
+    border-radius: .75rem;
+    background: #1b2c40;
+    color: white;
+    font: inherit;
+}
+.question small { color: #b9c9df; line-height: 1.5; font-size: .88rem; }
+#erro-imagem { color: #ffc2bb; }
+#erro-imagem:empty { display: none; }
+:focus-visible { outline: 3px solid #9ccaff; outline-offset: 3px; }
+.cert-preview-frame {
+    padding: clamp(1.4rem, 4.5vw, 3.5rem);
+    border-radius: .5rem;
+    background: white url("modelo-exemplo.png") center / cover no-repeat;
+    color: #071120;
+    text-align: center;
+}
+.folha {
+    padding: clamp(1.2rem, 3.2vw, 2.5rem);
+    border-radius: .5rem;
+    background: rgba(255,255,255,.90);
+    box-shadow: 0 10px 30px #07112013;
+}
+.folha h2 { font-size: clamp(1.3rem, 3vw, 2.1rem); text-transform: uppercase; line-height: 1.15; }
+#cert-preview-text { margin: 1.3rem auto; color: #333; line-height: 1.6; max-width: 55ch; overflow-wrap: anywhere; }
+.assinatura-cert { display: inline-block; margin-top: 1rem; padding: .45rem .5rem 0; border-top: 1px solid #555; color: #555; font-size: .8rem; }
